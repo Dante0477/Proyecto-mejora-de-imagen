@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta para Bruno Asesor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: "Modern Professional" - A clean palette with a light gray background, dark text for readability, and a strong blue for accents and calls to action, conveying trust and modernity. -->
+    <!-- Application Structure Plan: The SPA is structured as a narrative journey to guide the client, Bruno, from his current state to a successful future. It starts with a Hero section to grab attention, followed by a personalized intro. The core "Services" are presented in interactive tabs to make the information digestible and engaging. A "Before & After" mockup provides a powerful visual proof of concept. The "Benefits" are highlighted in cards, and a "Process" timeline clarifies the workflow. A "Content Mix" chart adds a data-driven touch. The structure ends with a clear CTA. This non-linear, interactive approach is more persuasive than a static document because it involves the user and visually demonstrates value. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: 4 Service Phases -> Goal: Organize/Inform -> Viz/Method: Interactive Tabs (HTML/JS/Tailwind) -> Interaction: Click to reveal content -> Justification: Prevents overwhelming the user with text, making the service offering easy to explore.
+        - Report Info: Profile Improvement -> Goal: Compare/Persuade -> Viz/Method: "Before & After" HTML/CSS Mockup -> Interaction: Static visual comparison -> Justification: The most powerful way to show tangible results and the value of design.
+        - Report Info: Content Strategy Mix -> Goal: Compare/Inform -> Viz/Method: Doughnut Chart (Chart.js) -> Interaction: Hover for tooltips -> Justification: Visualizes the content plan, making the strategy feel more concrete and data-informed.
+        - Report Info: Process -> Goal: Inform/Organize -> Viz/Method: Vertical Timeline (HTML/CSS/Tailwind) -> Interaction: Static visual -> Justification: Clearly outlines the workflow, managing client expectations and showing a structured approach.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-active {
+            background-color: #2563eb;
+            color: white;
+        }
+        .tab-inactive {
+            background-color: #e5e7eb;
+            color: #374151;
+        }
+        .chart-container {
+            position: relative; 
+            width: 100%; 
+            max-width: 400px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            height: auto;
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="text-xl font-bold text-blue-600">
+                Propuesta Digital
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#servicios" class="text-slate-600 hover:text-blue-600 transition">Servicios</a>
+                <a href="#visualizacion" class="text-slate-600 hover:text-blue-600 transition">Visualización</a>
+                <a href="#beneficios" class="text-slate-600 hover:text-blue-600 transition">Beneficios</a>
+                <a href="#pasos" class="text-slate-600 hover:text-blue-600 transition">Contacto</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="bg-white">
+            <div class="container mx-auto px-6 py-20 md:py-32 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 leading-tight">Transformamos tu Instagram en una herramienta de captación.</h1>
+                <p class="mt-6 text-lg text-slate-600 max-w-2xl mx-auto">Hola Bruno, hemos preparado un plan a medida para llevar tu perfil profesional al siguiente nivel.</p>
+                <a href="#propuesta" class="mt-8 inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">Ver la Propuesta</a>
+            </div>
+        </section>
+
+        <section id="propuesta" class="py-20">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Tu Plan de Crecimiento Personalizado</h2>
+                    <p class="mt-4 text-slate-600 max-w-3xl mx-auto">Nuestro objetivo es claro: convertir tu perfil de un simple contacto a una máquina de generar confianza y atraer clientes calificados.</p>
+                </div>
+
+                <div id="servicios" class="bg-white p-8 rounded-2xl shadow-xl max-w-4xl mx-auto">
+                    <h3 class="text-2xl font-bold text-center mb-8">Nuestros Servicios: Un Plan Integral</h3>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center mb-8 border-b border-slate-200">
+                        <button data-tab="tab1" class="tab-button tab-active py-3 px-4 font-medium text-sm sm:text-base flex-grow text-center rounded-t-lg transition">Fase 1: Optimización</button>
+                        <button data-tab="tab2" class="tab-button tab-inactive py-3 px-4 font-medium text-sm sm:text-base flex-grow text-center rounded-t-lg transition">Fase 2: Diseño Visual</button>
+                        <button data-tab="tab3" class="tab-button tab-inactive py-3 px-4 font-medium text-sm sm:text-base flex-grow text-center rounded-t-lg transition">Fase 3: Contenido</button>
+                        <button data-tab="tab4" class="tab-button tab-inactive py-3 px-4 font-medium text-sm sm:text-base flex-grow text-center rounded-t-lg transition">Fase 4: Crecimiento</button>
+                    </div>
+
+                    <div id="tabContent">
+                        <div id="tab1" class="tab-pane">
+                            <h4 class="font-bold text-xl mb-4 text-blue-700">🚀 FASE 1: Optimización y Relanzamiento de Perfil</h4>
+                            <p class="text-slate-600 mb-6">El objetivo es que tu perfil luzca 100% profesional, confiable y claro en menos de 5 segundos.</p>
+                            <ul class="space-y-4">
+                                <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">✓</span><div><strong class="text-slate-800">Foto de Perfil Profesional:</strong> Selección y retoque de una imagen que inspire máxima confianza.</div></li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">✓</span><div><strong class="text-slate-800">Biografía Estratégica:</strong> Reescribimos tu bio para comunicar tu valor y con un llamado a la acción claro.</div></li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">✓</span><div><strong class="text-slate-800">Árbol de Enlaces (Linktree):</strong> Un único enlace profesional con acceso a tu WhatsApp, web y más.</div></li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">✓</span><div><strong class="text-slate-800">Historias Destacadas:</strong> Diseño de portadas profesionales para organizar tu información clave (Servicios, Sobre Mí, Clientes).</div></li>
+                            </ul>
+                        </div>
+                        <div id="tab2" class="tab-pane hidden">
+                            <h4 class="font-bold text-xl mb-4 text-blue-700">🎨 FASE 2: Diseño de Identidad Visual</h4>
+                            <p class="text-slate-600 mb-6">El objetivo es crear una estética de marca memorable y coherente que te distinga de la competencia.</p>
+                            <ul class="space-y-4">
+                                <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">✓</span><div><strong class="text-slate-800">Paleta de Colores y Tipografías:</strong> Definimos un manual de marca simple para una línea visual consistente.</div></li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">✓</span><div><strong class="text-slate-800">Diseño de Plantillas Personalizadas:</strong> Creamos plantillas en Canva para tus diferentes contenidos (frases, tips, carruseles).</div></li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">✓</span><div><strong class="text-slate-800">Planificación Estética del Feed:</strong> Diseñamos la apariencia de tu feed para que luzca ordenado y atractivo.</div></li>
+                            </ul>
+                        </div>
+                        <div id="tab3" class="tab-pane hidden">
+                             <h4 class="font-bold text-xl mb-4 text-blue-700">✍️ FASE 3: Gestión y Creación de Contenido de Valor</h4>
+                            <p class="text-slate-600 mb-6">El objetivo es atraer, educar y convertir a tu audiencia con contenido que responda a sus necesidades y sueños.</p>
+                             <ul class="space-y-4">
+                                <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">✓</span><div><strong class="text-slate-800">Calendario Editorial Mensual:</strong> Planificamos con antelación todos los temas y fechas de publicación.</div></li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">✓</span><div><strong class="text-slate-800">Contenido Multi-formato:</strong> Creamos posts, Reels dinámicos y Stories diarias para mantener a tu audiencia enganchada.</div></li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">✓</span><div><strong class="text-slate-800">Copywriting Persuasivo:</strong> Redactamos todos los textos enfocados en conectar y motivar a la acción.</div></li>
+                            </ul>
+                        </div>
+                        <div id="tab4" class="tab-pane hidden">
+                            <h4 class="font-bold text-xl mb-4 text-blue-700">📈 FASE 4: Estrategia de Crecimiento y Comunidad</h4>
+                            <p class="text-slate-600 mb-6">El objetivo es aumentar tu visibilidad, conseguir seguidores de calidad (potenciales clientes) y construir una comunidad leal.</p>
+                            <ul class="space-y-4">
+                                <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">✓</span><div><strong class="text-slate-800">Estrategia de Hashtags:</strong> Investigamos y seleccionamos hashtags locales y de nicho para maximizar tu alcance.</div></li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">✓</span><div><strong class="text-slate-800">Community Management Activo:</strong> Gestionamos comentarios y mensajes para una atención al cliente impecable.</div></li>
+                                <li class="flex items-start"><span class="text-blue-500 mr-3 mt-1">✓</span><div><strong class="text-slate-800">Interacción Estratégica:</strong> Interactuamos con perfiles de la comunidad local para aumentar tu notoriedad.</div></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="visualizacion" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">La Diferencia es Visual</h2>
+                    <p class="mt-4 text-slate-600 max-w-3xl mx-auto">Una imagen vale más que mil palabras. Así es como planeamos transformar tu presencia online.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="font-bold text-xl text-center mb-4">Antes: Perfil Actual</h3>
+                        <div class="bg-gray-800 rounded-2xl p-4 max-w-sm mx-auto shadow-lg">
+                            <div class="flex items-center mb-4">
+                                <img src="https://placehold.co/80x80/334155/e2e8f0?text=B" class="rounded-full w-20 h-20 border-2 border-gray-600">
+                                <div class="ml-4 flex-grow">
+                                    <div class="flex justify-around text-white text-center">
+                                        <div><span class="font-bold">1</span><br><span class="text-sm text-gray-400">publi..</span></div>
+                                        <div><span class="font-bold">92</span><br><span class="text-sm text-gray-400">segu..</span></div>
+                                        <div><span class="font-bold">8</span><br><span class="text-sm text-gray-400">segui..</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-white text-sm">
+                                <p class="font-bold">Bruno Asesor</p>
+                                <p class="text-gray-400">Finanzas, Productor Asesor Matriculado...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-xl text-center mb-4">Después: Propuesta Profesional</h3>
+                        <div class="bg-white rounded-2xl p-4 max-w-sm mx-auto shadow-2xl border">
+                             <div class="flex items-center mb-4">
+                                <img src="https://placehold.co/80x80/2563eb/ffffff?text=B" class="rounded-full w-20 h-20 border-2 border-blue-200">
+                                <div class="ml-4 flex-grow">
+                                    <div class="flex justify-around text-slate-800 text-center">
+                                        <div><span class="font-bold">58</span><br><span class="text-sm text-slate-500">posts</span></div>
+                                        <div><span class="font-bold">2.1K</span><br><span class="text-sm text-slate-500">seguidores</span></div>
+                                        <div><span class="font-bold">350</span><br><span class="text-sm text-slate-500">seguidos</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-slate-800 text-sm">
+                                <p class="font-bold">Bruno | Asesor Financiero 👨‍💼</p>
+                                <p class="text-slate-600">Te ayudo a hacer realidad tus proyectos 👇<br>🏡 Créditos para tu Casa<br>🚗 Financiación Auto/Moto<br>💰 Planes de Ahorro</p>
+                                <a href="#" class="text-blue-600 font-semibold">linktr.ee/bruno.asesor</a>
+                            </div>
+                             <div class="mt-4 flex justify-around">
+                                <div class="text-center"><div class="w-16 h-16 bg-slate-200 rounded-full mx-auto mb-1 flex items-center justify-center text-slate-500 text-xs">Servicios</div></div>
+                                <div class="text-center"><div class="w-16 h-16 bg-slate-200 rounded-full mx-auto mb-1 flex items-center justify-center text-slate-500 text-xs">Clientes</div></div>
+                                <div class="text-center"><div class="w-16 h-16 bg-slate-200 rounded-full mx-auto mb-1 flex items-center justify-center text-slate-500 text-xs">Contacto</div></div>
+                                <div class="text-center"><div class="w-16 h-16 bg-slate-200 rounded-full mx-auto mb-1 flex items-center justify-center text-slate-500 text-xs">FAQ</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mt-20">
+                     <div class="md:order-2">
+                        <h3 class="font-bold text-2xl mb-4">Nuestro Proceso de Trabajo</h3>
+                        <p class="text-slate-600 mb-6">Trabajamos con una metodología clara para garantizar resultados medibles. Este es nuestro plan de acción para los primeros dos meses.</p>
+                        <ol class="relative border-l border-slate-200">                  
+                            <li class="mb-10 ml-4">
+                                <div class="absolute w-3 h-3 bg-slate-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                                <time class="mb-1 text-sm font-normal leading-none text-slate-400">Semana 1</time>
+                                <h4 class="text-lg font-semibold text-slate-900">Estrategia y Diseño</h4>
+                                <p class="text-base font-normal text-slate-500">Optimización completa del perfil y diseño de la identidad visual y plantillas.</p>
+                            </li>
+                            <li class="mb-10 ml-4">
+                                <div class="absolute w-3 h-3 bg-slate-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                                <time class="mb-1 text-sm font-normal leading-none text-slate-400">Semanas 2-4</time>
+                                <h4 class="text-lg font-semibold text-slate-900">Lanzamiento de Contenido</h4>
+                                <p class="text-base font-normal text-slate-500">Publicación del primer contenido, inicio de la interacción y captación de seguidores.</p>
+                            </li>
+                            <li class="ml-4">
+                                <div class="absolute w-3 h-3 bg-slate-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
+                                <time class="mb-1 text-sm font-normal leading-none text-slate-400">Mes 2 y Adelante</time>
+                                <h4 class="text-lg font-semibold text-slate-900">Crecimiento y Análisis</h4>
+                                <p class="text-base font-normal text-slate-500">Gestión continua, análisis de métricas y ajuste de la estrategia para mejores resultados.</p>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="md:order-1">
+                        <h3 class="font-bold text-2xl mb-4 text-center">Mix de Contenidos Planificado</h3>
+                        <div class="chart-container">
+                             <canvas id="contentMixChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="beneficios" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">¿Qué Obtienes al Trabajar con Nosotros?</h2>
+                    <p class="mt-4 text-slate-600 max-w-3xl mx-auto">Más que solo publicaciones. Obtienes un socio estratégico para tu crecimiento digital.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <div class="text-4xl mb-4">⏱️</div>
+                        <h4 class="font-bold text-lg mb-2">Ahorro de Tiempo</h4>
+                        <p class="text-slate-600 text-sm">Delega tu presencia online y enfócate 100% en asesorar a tus clientes.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <div class="text-4xl mb-4">👔</div>
+                        <h4 class="font-bold text-lg mb-2">Imagen Profesional</h4>
+                        <p class="text-slate-600 text-sm">Tu perfil se verá como el de un líder del sector, generando confianza inmediata.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <div class="text-4xl mb-4">🎯</div>
+                        <h4 class="font-bold text-lg mb-2">Crecimiento Sostenido</h4>
+                        <p class="text-slate-600 text-sm">Atraerás de forma constante a personas realmente interesadas en tus servicios.</p>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                        <div class="text-4xl mb-4">✍️</div>
+                        <h4 class="font-bold text-lg mb-2">Contenido de Calidad</h4>
+                        <p class="text-slate-600 text-sm">Publicaciones que te posicionarán como un experto y educarán a tu audiencia.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pasos" class="bg-blue-600 text-white">
+            <div class="container mx-auto px-6 py-20 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold">¿Listo para Empezar?</h2>
+                <p class="mt-4 max-w-2xl mx-auto opacity-90">Demos el siguiente paso. Nos encantaría conversar sobre esta propuesta y adaptarla a tus objetivos específicos.</p>
+                <a href="mailto:tuemail@example.com?subject=Interesado en la Propuesta para Bruno Asesor" class="mt-8 inline-block bg-white text-blue-600 font-bold py-3 px-8 rounded-lg hover:bg-slate-100 transition shadow-lg">Agendar una Llamada de 15 Min</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 text-white">
+        <div class="container mx-auto px-6 py-8 text-center text-slate-400">
+            <p class="font-bold text-lg text-white mb-2">[Tu Nombre / Nombre de tu Agencia]</p>
+            <p>Expertos en gestión de redes sociales y crecimiento digital.</p>
+            <div class="mt-4">
+                <a href="mailto:tuemail@example.com" class="hover:text-white transition">tuemail@example.com</a>
+                <span class="mx-2">|</span>
+                <a href="tel:+541100000000" class="hover:text-white transition">+54 11 0000-0000</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab-button');
+        const panes = document.querySelectorAll('.tab-pane');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetPaneId = tab.getAttribute('data-tab');
+
+                tabs.forEach(t => {
+                    t.classList.remove('tab-active');
+                    t.classList.add('tab-inactive');
+                });
+
+                tab.classList.add('tab-active');
+                tab.classList.remove('tab-inactive');
+
+                panes.forEach(pane => {
+                    if (pane.id === targetPaneId) {
+                        pane.classList.remove('hidden');
+                    } else {
+                        pane.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        const ctx = document.getElementById('contentMixChart').getContext('2d');
+        const contentMixChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Reels Educativos', 'Carruseles de Tips', 'Historias Interactivas', 'Posts de Valor'],
+                datasets: [{
+                    label: 'Mix de Contenido',
+                    data: [40, 30, 20, 10],
+                    backgroundColor: [
+                        'rgba(37, 99, 235, 0.8)',
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(96, 165, 250, 0.8)',
+                        'rgba(147, 197, 253, 0.8)'
+                    ],
+                    borderColor: [
+                        '#ffffff'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                family: "'Inter', sans-serif"
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += context.parsed + '%';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
